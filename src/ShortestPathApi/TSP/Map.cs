@@ -39,13 +39,15 @@ namespace ShortestPathApi.TSP
             float cost = startingPoint.OutgoingConnection.Cost;
 
             Point currentPoint = startingPoint.OutgoingConnection.To;
+            float lastCost = 0;
             while (currentPoint != startingPoint)
             {
                 cost += currentPoint.OutgoingConnection.Cost;
+                lastCost = currentPoint.OutgoingConnection.Cost;
                 currentPoint = currentPoint.OutgoingConnection.To;
             }
 
-            return cost;
+            return cost - lastCost;
         }
     }
 }
