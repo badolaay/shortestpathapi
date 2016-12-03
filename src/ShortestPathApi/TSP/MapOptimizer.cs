@@ -49,7 +49,7 @@ namespace ShortestPathApi.TSP
                 do
                 {
                     point = map.GetPoint(random.Next(map.Points.Count));
-                } while (point?.IncommingConnection != null);
+                } while (point != null && point.IncommingConnection != null);
 
                 //find the nearest point with a connection
                 Point nearestPoint = null;
