@@ -48,7 +48,7 @@ namespace ShortestPathApi.TSP
                 Point point;
                 do
                 {
-                    point = map.GetPoint(random.Next(map.Points.Count));
+                    point = map.GetPoint(map.SelectedPoints[random.Next(map.Points.Count)]);
                 } while (point != null && point.IncommingConnection != null);
 
                 //find the nearest point with a connection
