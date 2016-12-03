@@ -7,15 +7,15 @@ namespace ShortestPathApi.TSP
 {
     public class Calculate
     {
-        public string CalculatePath()
+        public IList<Point> CalculatePath(int[] selectedPoints)
         {
             IMapCreator mapCreator = new StaticMapCreator();
 
-            Map map = mapCreator.CreateMap(String.Empty); //data is static, no string necessary
+            Map map = mapCreator.CreateMap(selectedPoints);
 
             map.Optimize(new MapOptimizer());
 
-            return "Optimized route has a cost of " + map.GetCostOfWholeRoute();
+            return map.Points;
 
         }
     }

@@ -12,12 +12,28 @@ namespace ShortestPathApi.TSP
             Random random = new Random();
 
             {
-                //connect two randomly selected points
-                Point pointA = map.GetPoint(random.Next(map.Points.Count));
-                Point pointB;
+                //connect first two points
+
+                Point pointA = map.GetPoint(0);//the entry to store
+                Point pointB = map.GetPoint(0);//just to initialize
                 do
                 {
-                    pointB = map.GetPoint(random.Next(map.Points.Count));
+                    int minCost = Int32.MaxValue;
+
+                    //to make sure point B is the closest to point A
+                    foreach (KeyValuePair<string, int> keyValuePair in StaticMapCreator.PathCostMapping)
+                    {
+                        string startIndex = keyValuePair.Key.Substring(0, 1);
+                        int nextPointIndex = Int32.Parse(keyValuePair.Key.Substring(2, keyValuePair.Key.Length - 2));
+
+                        if (startIndex.Equals("0") && keyValuePair.Value < minCost)
+                        {
+                            minCost = keyValuePair.Value;
+                            pointB = map.GetPoint(nextPointIndex);
+                        }
+
+                    }
+                    //pointB = map.GetPoint(random.Next(map.Points.Count));
                 } while (pointB == pointA);
 
                 pointA.ConnectTo(pointB);

@@ -7,10 +7,37 @@ namespace ShortestPathApi.TSP
 {
     public class StaticMapCreator : IMapCreator
     {
-        public Map CreateMap(string data)
+        /**Whenever you add a new point always make entries for that point in below dictionary*/
+
+        public static readonly Dictionary<string, int> PathCostMapping = new Dictionary<string, int>
+            {
+                {"0_1", 1},
+                {"0_2", 2},
+                {"0_3", 3},
+                {"1_2", 4},
+                {"1_3", 5},
+                {"2_3", 6}
+            };
+
+        public Map CreateMap(int[] selectedPoints)
         {
             Map map = new Map();
+            for (int i = 0; i < selectedPoints.Length; i++)
+            {
+                GetOrCreatePoint(ref map, selectedPoints[i]);
 
+                for (int j = i + 1; j < selectedPoints.Length; j++)
+                {
+                    Point b = GetOrCreatePoint(ref map, selectedPoints[j]);
+                    var pointI = map.GetPoint(selectedPoints[i]);
+                    var pointJ = map.GetPoint(selectedPoints[j]);
+                    AddConnections(ref pointI, ref pointJ, PathCostMapping[selectedPoints[i] + "_" + selectedPoints[j]]);
+                }
+            }
+
+
+
+            /*
             Point a = new Point(0);
             Point b = new Point(1);
             Point c = new Point(2);
@@ -67,8 +94,31 @@ namespace ShortestPathApi.TSP
                 .AddPoint(c)
                 .AddPoint(d)
                 .AddPoint(e);
-
+            */
             return map;
         }
+        private static void AddConnections(ref Point a, ref Point b, int cost)
+        {
+            Connection ab = new Connection(a, b, cost);
+            Connection ba = new Connection(b, a, cost);
+            a.AddPossibleConnection(ab);
+            b.AddPossibleConnection(ba);
+        }
+
+        private static Point GetOrCreatePoint(ref Map map, int pointId)
+        {
+            Point point = null;
+            if (map.GetPoint(pointId) == null)
+            {
+                point = new Point(pointId);
+                map.AddPoint(point);
+            }
+            else
+            {
+                point = map.GetPoint(pointId);
+            }
+            return point;
+        }
+
     }
 }

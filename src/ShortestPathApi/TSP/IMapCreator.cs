@@ -7,6 +7,6 @@ namespace ShortestPathApi.TSP
 {
     public interface IMapCreator
     {
-        Map CreateMap(string data);
+        Map CreateMap(int[] selectedPoints);
     }
 }

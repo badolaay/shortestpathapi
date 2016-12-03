@@ -7,7 +7,6 @@ namespace ShortestPathApi.TSP
 {
     public class Map
     {
-
         public IList<Point> Points { get; private set; }
 
         public Map() : this(new List<Point>()) { }
@@ -25,7 +24,7 @@ namespace ShortestPathApi.TSP
 
         public Point GetPoint(int id)
         {
-            return Points.Single(x => x.Id == id);
+            return Points.SingleOrDefault(x => x.Id == id);
         }
 
         public void Optimize(IMapOptimizer optimizer)
