@@ -12,7 +12,7 @@ namespace ShortestPathApi.TSP
             IMapCreator mapCreator = new StaticMapCreator();
 
             Map map = mapCreator.CreateMap(selectedPoints);
-
+            map.SelectedPoints = selectedPoints;
             map.Optimize(new MapOptimizer());
 
             return map.Points;

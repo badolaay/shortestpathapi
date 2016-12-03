@@ -7,6 +7,8 @@ namespace ShortestPathApi.TSP
 {
     public class Map
     {
+        public int[] SelectedPoints { get; set; }
+
         public IList<Point> Points { get; private set; }
 
         public Map() : this(new List<Point>()) { }

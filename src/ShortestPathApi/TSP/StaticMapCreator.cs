@@ -11,11 +11,11 @@ namespace ShortestPathApi.TSP
 
         public static readonly Dictionary<string, int> PathCostMapping = new Dictionary<string, int>
             {
-                {"0_1", 1},
-                {"0_2", 2},
+                {"0_1", 5},
+                {"0_2", 4},
                 {"0_3", 3},
-                {"1_2", 4},
-                {"1_3", 5},
+                {"1_2", 2},
+                {"1_3", 1},
                 {"2_3", 6}
             };
 

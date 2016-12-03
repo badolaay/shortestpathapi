@@ -26,7 +26,7 @@ namespace ShortestPathApi.TSP
                         string startIndex = keyValuePair.Key.Substring(0, 1);
                         int nextPointIndex = Int32.Parse(keyValuePair.Key.Substring(2, keyValuePair.Key.Length - 2));
 
-                        if (startIndex.Equals("0") && keyValuePair.Value < minCost)
+                        if (startIndex.Equals("0") && map.SelectedPoints.Contains(nextPointIndex) && keyValuePair.Value < minCost)
                         {
                             minCost = keyValuePair.Value;
                             pointB = map.GetPoint(nextPointIndex);
