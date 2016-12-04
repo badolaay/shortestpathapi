@@ -8,7 +8,6 @@ namespace ShortestPathApi.TSP
     public class StaticMapCreator : IMapCreator
     {
         /**Whenever you add a new point always make entries for that point in below dictionary*/
-
         public static readonly Dictionary<string, int> PathCostMapping = new Dictionary<string, int>
             {
                 {"0_1", 1},{"1_0", 1},
